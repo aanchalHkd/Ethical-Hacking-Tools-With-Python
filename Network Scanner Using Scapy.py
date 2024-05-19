@@ -1,5 +1,6 @@
 import scapy.all as scapy
-import optparse
+#import optparse -> Deprecated
+import argparse
 
 
 # make sure the code is in the same network as the range that you want to scan
@@ -9,10 +10,14 @@ import optparse
 # scan("10.3.5.8/24") # provide the IP range/network that we want to scan
 
 def get_argument():
-    parser = optparse.OptionParser() #everything that starts with capital latter in python is a cloass
+    #parser = optparse.OptionParser() #everything that starts with capital latter in python is a cloass
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-ip","--iprange",dest="ip",help="Ip Address or network range to scan")
+    option=parser.parse_args()
 
-    parser.add_option("-ip","--iprange",dest="ip",help="Ip Address or range to scan")
-    (option, argument)= parser.parse_args()
+
+    # parser.add_option("-ip","--iprange",dest="ip",help="Ip Address or range to scan")
+    # (option, argument)= parser.parse_args()
     if not option.ip:
         parser.error("[-] Please specify an IP Range. Use --help for more details")
     
